@@ -9,4 +9,7 @@ import scrapy
 
 
 class DocPageItem(scrapy.Item):
-    pass
+    title = scrapy.Field()
+    url = scrapy.Field()
+    toc = scrapy.Field()
+    content = scrapy.Field()
