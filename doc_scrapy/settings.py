@@ -14,6 +14,9 @@ BOT_NAME = 'doc_scrapy'
 SPIDER_MODULES = ['doc_scrapy.spiders']
 NEWSPIDER_MODULE = 'doc_scrapy.spiders'
 
+MONGO_URI = 'mongodb://mongodb:27017/'
+MONGO_DB = 'public_wpdocs'
+MONGO_COLLECTION = 'full_pages'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'docscrapy (+http://www.yourdomain.com)'
@@ -64,9 +67,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'docscrapy.pipelines.DocscrapyPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'doc_scrapy.pipelines.MongoPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +91,5 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+LOG_LEVEL = 'INFO'

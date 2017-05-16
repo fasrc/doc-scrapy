@@ -22,4 +22,4 @@ WORKDIR /source
 
 # Command
 ENTRYPOINT ["scrapy"]
-CMD ["crwal", "public-wpdocs"]
+CMD ["crawl", "public-wpdocs"]

@@ -8,11 +8,12 @@ from doc_scrapy.items import DocPageItem
 
 class PWPDocsCrawler(CrawlSpider):
     name = 'public-wpdocs'
-    allowed_domains = ['rc.fas.havard.edu']
-    start_urls = ['https://rc.fas.harvard.edu/resources/']
+    allowed_domains = ['www.rc.fas.harvard.edu']
+    start_urls = ['https://www.rc.fas.harvard.edu/resources/']
 
     rules = (
-        Rule(LinkExtractor(deny=('/#'), unique=True, callback='parse_page'))
+        Rule(LinkExtractor(deny=('\/#', '\/events\/page\/\d*\/\?'), unique=True), follow=True,
+             callback='parse_page'),
     )
 
     def parse_page(self, response):
@@ -20,8 +21,7 @@ class PWPDocsCrawler(CrawlSpider):
         page = DocPageItem()
         page['title'] = response.xpath('//title/text()').extract_first()
         page['url'] = response.url
-        toc_selector = response.xpath('//div[@id="toc_container"/ul')
-        page['toc'] = toc_selector.xpath('//li/a/text()').extract()
-        page['content'] = response.xpath('//div[@class="entry-content"]')
+        page['toc'] = response.xpath('//div[@id="toc_container"]/li/a/text()').extract()
+        page['links'] = response.xpath('//a/@href').extract()
+        page['content'] = response.xpath('//div[@class="entry-content"]').extract()
         return page
-
