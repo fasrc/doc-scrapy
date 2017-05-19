@@ -23,5 +23,6 @@ class PWPDocsCrawler(CrawlSpider):
         page['url'] = response.url
         page['toc'] = response.xpath('//div[@id="toc_container"]/li/a/text()').extract()
         page['links'] = response.xpath('//a/@href').extract()
+        page['content_links'] = response.xpath('//article').xpath('//a/@href[not(ancestor::footer[@id="footer"]|ancestor::header)]').extract()
         page['content'] = response.xpath('//div[@class="entry-content"]').extract()
         return page

@@ -13,4 +13,5 @@ class DocPageItem(scrapy.Item):
     url = scrapy.Field()
     toc = scrapy.Field()
     links = scrapy.Field()
+    content_links = scrapy.Field()
     content = scrapy.Field()

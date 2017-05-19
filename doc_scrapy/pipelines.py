@@ -19,7 +19,7 @@ class MongoPipeline(object):
             mongo_uri=crawler.settings.get('MONGO_URI'),
             mongo_db=crawler.settings.get('MONGO_DB', 'items'),
             mongo_collection=crawler.settings.get('MONGO_COLLECTION',
-                                                  'scrapy_tiems')
+                                                  'scrapy_items')
         )
 
     def open_spider(self, spider):
